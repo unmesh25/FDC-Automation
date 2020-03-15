@@ -1,0 +1,38 @@
+*{
+	padding: 0;
+	margin: 0;
+	font-family: Century Gothic;
+}
+header{
+	height: 10vh;
+	background-color: black;
+	color: black;
+}
+ul{
+	list-style-type: none;
+	float: right;
+	margin-top: 10px;
+
+}
+ul li{
+	display: inline-block;
+
+}
+ul li a
+{
+	text-decoration: none;
+	border: 1px solid #fff;
+	padding: 5px 20px;
+	color: #fff;
+	 transition:  0.2s ease;
+}
+ul li a:hover
+{
+	background-color: #fff;
+	color: black;
+
+}
+.main{
+	max-width: 1200px;
+	margin: auto;
+}

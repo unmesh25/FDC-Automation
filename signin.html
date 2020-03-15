@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sign in page: Faculty</title>
+</head>
+<body>
+<form action = "sign.php" method = "POST">
+	Name: 
+	<br>
+	<input type = "text" name = "fname">
+	<br>
+	Email id:
+	<br>
+	<input type = "mail" name = "fmail">
+	<br>
+	Branch:
+	<br>
+	<select name = "fbranch">
+		<option>Comps</option>
+		<option>IT</option>
+		<option>Mech</option>
+		<option>EXTC</option>
+		<option>ETRX</option>
+	</select>
+	<br>
+	Phone No:
+	<br>
+	<input type = "text" name = "fnumber">
+	<br>
+	Member Type:
+	<br>
+	<input type = "radio" name = "ftype" value = "Faculty">Faculty
+	<br>
+	<input type = "radio" name = "ftype" value = "HOD">HOD
+	<br>
+	<input type = "radio" name = "ftype" value = "FDC Member">FDC Member
+	<br>
+	<input type = "radio" name = "ftype" value = "FDC Admin">FDC Admin
+	<br>
+	Password:
+	<br>
+	<input type = "text" name = "fpass">
+	<br>
+	Confirm Password:
+	<br>
+	<input type = "text" name = "fcpass">
+	<br>
+	<input type = "submit" value = "Submit">
+</form>
+</body>
+</html>
