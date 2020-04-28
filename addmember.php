@@ -1,129 +1,104 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="button.css">
+	<title>Add Member</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="img/logo.jpg">
+
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/btn.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	
+	
 	<style type="text/css">
-		.myform{
-			color: white;
-			font-size: 15px;
-			padding: 70px 20px 20px;
+		body{
+			background-image: url('img/background.jpg');
+			background-repeat: no-repeat;  
+			background-size: 2000px;
 		}
 
 
-
-		.blackboard:before {
-			box-sizing: border-box;
-			display: block;
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			background-image: linear-gradient( 175deg, transparent, transparent 40px, rgba(120, 120, 120, 0.1) 100px, rgba(120, 120, 120, 0.1) 110px, transparent 220px, transparent), linear-gradient( 200deg, transparent 80%, rgba(50, 50, 50, 0.3)), radial-gradient( ellipse at right bottom, transparent, transparent 200px, rgba(80, 80, 80, 0.1) 260px, rgba(80, 80, 80, 0.1) 320px, transparent 400px, transparent);
-			border: #2c2c2c solid 2px;
-			content: "Add Member";
-			font-family: 'Segoe UI', cursive;
-			font-size: 2.2em;
-			color: rgba(0,200,200,0.7);
-			text-align: center;
-			padding-top: 20px;
-		}
-
-		input[type="radio"]{
-			width: 0.7em;
+		input[type="checkbox"]{
+			width: 1em;
 			height:1.1em;
 		}
 
-		body{
-			background-image: url('laptop.jpg');
-			background-repeat: no-repeat;  
-			background-size: cover;
+		.login-box{
+			height: 660px;
+			margin-top:110px;
+			width: 450px;
 		}
 
-		label {
-		vertical-align: middle;
-		font-family: 'Segoe UI', cursive;
-		font-size: 1.6em;
-		color: rgba(238, 238, 238, 0.7);
-}
-
-
-input,
-textarea {
-		vertical-align: middle;
-		padding-left: 10px;
-		background: none;
-		border: none;
-		font-family: 'Segoe UI', cursive;
-		font-size: 1.6em;
-		color: red;
-		line-height: .6em;
-		outline: none;
-}
-
-input[type="submit"] {
-		cursor: pointer;
-		color: rgba(238, 238, 238, 0.7);
-		line-height: 1em;
-		padding: 0;
-		border: none;
-}
-
-input[type="submit"]:focus {
-		background: rgba(238, 238, 238, 0.2);
-		color: rgba(238, 238, 238, 0.2);
-		border: none;
-}
-
-input{
-	position: relative;
-	border-bottom: #c9ad86 solid 1px;
-}
 	</style>
-
-	<link rel="stylesheet" type="text/css" href="blackboard.css">
-	<title>Add member</title>
 </head>
 <body>
-	<div class="shade">
-	<ul>
-		<li><a href="fdcadminhome.php">Home</a></li>
-		<li><a href="addmember.php">Add Member</a></li>
-		<li><a href="deletemember.php">Delete Member</a></li>
-		<li><a href="specialrequest.php">Special Request</a></li>
-		<li><a href="fdcadminhistory.php">History</a></li>
-		<li style="float:right"><a class="active" href="logout.php">Logout</a></li>
-	</ul>
-	<div class="blackboard">
-		<div class="form">
-			<form action="add.php" method="post" class="myform">
-				<p>
-					<label>Member Name: </label>
-					<input type="text" name="mname" required>
-				</p>
-				<p>
-					<label>Member Email: </label>
-					<input type="text" name="memail" required>
-				</p>
-				<p>
-					<label>Member Type: </label><br>
-					<input type = "radio" name = "mtype" value = "Faculty">Faculty
-					<br>
-					<input type = "radio" name = "mtype" value = "HOD">HOD
-					<br>
-					<input type = "radio" name = "mtype" value = "FDC Member">FDC Member
-					<br>
-					<input type = "radio" name = "mtype" value = "FDC Admin">FDC Admin
-				</p>
-				<p>
-					<label>Password: </label>
-					<input type="password" name="mpassword" required>
-				</p>
-				<p class="wipeout">
-					<input type="submit" value="Submit" />
-				</p>
+		<ul>
+			<a href="fdcadminhome.php"><img src="img/logo.jpg" class="img"></a>
+			<li><a href="fdcadminhome.php">Home</a></li>
+			<li class="dropdown"><a href="#" class="dropbtn active">Member <i class="fa fa-caret-down"></i></a>
+					<div class="dropdown-content">
+					<a href="addmember.php" >Add Member</a>
+					<a href="deletemember.php">Delete Member</a>
+				</div>
+			</li>
+			<li><a href="specialrequest.php">Special Request</a></li>
+			<li><a href="fdcadminhistory.php">History</a></li>
+			<li><a href="conveyorcomment.php">Conveyor</a></li>
 
+			<li style="float: right;"><a href="logout.php" onclick="preventBack()">Logout</a></li>
+		</ul>
+
+
+		<div class="login-box">
+		<a href="addmember.php"><img src="img/logo.jpg" alt="KJSCE" class="avatar"></a>
+			<h1 style="color: black;">Add Member</h1>
+			<form action="add.php" method="POST">
+				<label>Member Name:</label>
+				<input type="text" name="mname" required autofocus><br>
+
+				<label>Member Email: </label>
+				<input type="text" name="memail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"><br>
+
+				<label>Member Type:</label><br>
+				<p id="checkedValue" style="color: red; font-size: 15px;"></p><br>
+					<input type = "checkbox" name = "mtype[]" value = "Faculty">Faculty<br>
+					<input type = "checkbox" name = "mtype[]" value = "HOD">HOD<br>
+					<input type = "checkbox" name = "mtype[]" value = "FDC Member">FDC Member<br>
+					<input type = "checkbox" name = "mtype[]" value = "FDC Admin">FDC Admin<br>
+					<input type = "checkbox" name = "mtype[]" value = "FDC Admin">Principal<br>
+
+				<label>Password: </label>
+				<input type="password" name="mpassword" required><br>
+				<?php
+				if(isset($_SESSION["errMsg"]))
+				{
+						$errMsg = $_SESSION["errMsg"];
+                        echo "<span>$errMsg</span>";
+                }
+				?>
+				</p>
+				<?php
+   					 unset($_SESSION["errMsg"]);
+				?>
+
+        		<input type="submit" value="Submit" id="check">
 			</form>
-		</div>
 	</div>
-</div>
 </body>
-</html>
+
+<script type="text/javascript">
+	var btn = document.getElementById('check');
+var msg = document.getElementById('checkedValue');
+btn.addEventListener('click', function() {
+  var len = document.querySelectorAll('.checkbox input[type="checkbox"]:checked').length
+  if (len <= 0) {
+    msg.innerHTML = "*Please check at least one";
+  }
+})
+</script>

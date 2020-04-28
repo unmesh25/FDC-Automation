@@ -5,12 +5,23 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="img/logo.jpg">
+
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/btn.css">
+	<link rel="stylesheet" type="text/css" href="css/table.css">
+
+	
 	<style type="text/css">
 		body{
-			background-image: url('laptop.jpg');
+			background-image: url('img/background.jpg');
 			background-repeat: no-repeat;  
 			background-size: cover;
 		}
+
 	</style>
 
 	<script type="text/javascript">
@@ -18,9 +29,7 @@ session_start();
         setTimeout("preventBack()", 0);
         window.onunload = function () { null };
     </script>
-	<link rel="stylesheet" type="text/css" href="button.css">
-	<link rel="stylesheet" type="text/css" href="table.css">
-	<link rel="stylesheet" type="text/css" href="blackboard.css">
+	
 	<title>Special Request Status</title>
 	
 </head>

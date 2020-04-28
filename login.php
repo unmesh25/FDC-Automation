@@ -27,7 +27,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	$ftype = "";
 	$fbranch = "";
 
-	$sql = "Select * from faculty where Email = '$fmail' and Password = '$_SESSION[pass]'";
+	$sql = "Select * from faculty where Email = '$fmail' and Password = '$_SESSION[pass]' and Inactive = '0'";
 	$result = $conn->query($sql);
 	if($result->num_rows>0)
 	{
@@ -44,28 +44,57 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 				$_SESSION['name'] = $row['Name'];
 				$_SESSION['branch'] = $row['Branch'];
 				$ftype = $row['MemberType'];
-				if($ftype == "Faculty")
-				{
-					header("Location: facultyhome.php");
+
+				$type = explode(',', $ftype);
+				$count = count($type);
+				if($count > 1)
+				{	
+					echo "<form action = 'facultydetails3.php' method = 'GET'>";
+					foreach ($type as $key) {
+						if($key == 'FDC Member')
+						{
+							$key1 = 'FDC_Member';
+						}
+						else if($key == 'FDC Admin')
+						{
+							$key1 = 'FDC_Admin';	
+						}
+						else
+						{
+							$key1 = $key;
+						}
+						echo "<input type = 'radio' name = 'facultytype' value = ".$key1.">".$key;
+					}
+					echo "<input type = 'submit' value = 'Submit'></form>";
 				}
-				else if($ftype == "HOD")
-				{
-					header("Location: hodhome.php");
-				}
-				else if($ftype == "FDC Member")
-				{
-					header("Location: fdchome.php");
-				}
-				else if($ftype == "FDC Admin")
-				{
-					header("Location: fdcadminhome.php");
+				else
+				{	
+					echo "in";
+					$type = implode('',$type);
+					if($type == "Faculty")
+					{
+						header("Location: facultyhome.php");
+					}
+					else if($type == "HOD")
+					{
+						header("Location: hodhome.php");
+					}
+					else if($type == "FDC Member")
+					{
+						header("Location: fdchome.php");
+					}
+					else if($type == "FDC Admin")
+					{
+						header("Location: fdcadminhome.php");
+					}
 				}
 			}
 		}
 	}
 	else
 	{
-		header("Location: error.php");
+		$_SESSION['errMsg'] = "*Invalid Email or Password";
+		header("Location: index.php");
 	}
 
 }

@@ -1,29 +1,50 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-		<style type="text/css">
+	<title>Special Request</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="img/logo.jpg">
+
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/btn.css">
+	<link rel="stylesheet" type="text/css" href="css/table.css">
+
+	
+	<style type="text/css">
 		body{
-			background-image: url('laptop.jpg');
+			background-image: url('img/background.jpg');
 			background-repeat: no-repeat;  
-			background-size: 1800px 800px;
+			background-size: cover;
 		}
+
 	</style>
-		<link rel="stylesheet" type="text/css" href="button.css">
-		<link rel="stylesheet" type="text/css" href="table.css">
-		<link rel="stylesheet" type="text/css" href="blackboard.css">
-	<title>HOD REQUEST</title>
 </head>
 <body>
-	<div class="shade">
-	<ul>
-	<li><a href="fdcadminhome.php">Home</a></li>
-		<li><a href="addmember.php">Add Member</a></li>
-		<li><a href="deletemember.php">Delete Member</a></li>
-		<li><a href="specialrequest.php">Special Request</a></li>
-		<li><a href="fdcadminhistory.php">History</a></li>
-		<li style="float:right"><a class="active" href="logout.php">Logout</a></li>
-	</ul>
-	<p style="text-align: center;font-size: 1.5em;">
+		<ul>
+			<a href="fdcadminhome.php"><img src="img/logo.jpg" class="img"></a>
+			<li><a href="fdcadminhome.php">Home</a></li>
+			<li class="dropdown"><a href="#" class="dropbtn">Member <i class="fa fa-caret-down"></i></a>
+					<div class="dropdown-content">
+					<a href="addmember.php" >Add Member</a>
+					<a href="deletemember.php">Delete Member</a>
+				</div>
+			</li>
+			<li><a href="specialrequest.php" class="active">Special Request</a></li>
+			<li><a href="fdcadminhistory.php">History</a></li>
+			<li><a href="conveyorcomment.php">Conveyor</a></li>
+
+			<li style="float: right;"><a href="logout.php" onclick="preventBack()">Logout</a></li>
+		</ul>
+
+
+
+		<p style="text-align: center;font-size: 2em;">
 	<label>Special Requests</label>
 </p>
 <table border = "1 solid black">
@@ -37,7 +58,6 @@
 		<td>Comment</td>
 	</tr>
 	<?php
-		session_start();
 		if($_SERVER['REQUEST_METHOD'] == 'GET')
 		{
 
@@ -56,7 +76,7 @@
 				echo "Error".mysqli_connect_error();
 			}*/
 
-			$sql = "Select a.*, b.Admin_Mail from fdc_leave_data a left join admin_sanction_data b on a.Start_date=b.Start_date where a.Special_Request = 'Yes' and b.Admin_Mail = ''";
+			$sql = "Select a.*, b.Admin_Mail from fdc_leave_data a left join admin_sanction_data b on a.Start_date=b.Start_date where a.Special_Request = 'Yes' and b.Admin_Mail = '' and a.Inactive = '0'";
 			$result = $conn->query($sql);
 			if($result->num_rows>0)
 			{
@@ -81,4 +101,3 @@
 	?>
 </table>
 </body>
-</html>

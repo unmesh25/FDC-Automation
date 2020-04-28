@@ -5,54 +5,120 @@ session_start();
 <html>
 <head>
 
-	<link rel="stylesheet" type="text/css" href="blackboard.css">
-	<link rel="stylesheet" type="text/css" href="button.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="img/logo.jpg">
+
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/btn.css">
+	<link rel="stylesheet" type="text/css" href="css/table.css">
+
+	
 	<style type="text/css">
-
-		.blackboard:before {
-			box-sizing: border-box;
-			display: block;
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			background-image: linear-gradient( 175deg, transparent, transparent 40px, rgba(120, 120, 120, 0.1) 100px, rgba(120, 120, 120, 0.1) 110px, transparent 220px, transparent), linear-gradient( 200deg, transparent 80%, rgba(50, 50, 50, 0.3)), radial-gradient( ellipse at right bottom, transparent, transparent 200px, rgba(80, 80, 80, 0.1) 260px, rgba(80, 80, 80, 0.1) 320px, transparent 400px, transparent);
-			border: #2c2c2c solid 2px;
-			font-family: 'Permanent Marker', cursive;
-			font-size: 2.2em;
-			content: "Leave Application";
-			color: rgba(238, 238, 238, 0.7);
-			text-align: center;
-			padding-top: 20px;
-		}
-
-		input[type="radio"]{
-			width: 0.7em;
-			height:1.1em;
-		}
-
-		input[type="number"]{
-			width: 6em;
-		}
-
-		input[type="date"]{
-			width: 9em;
-		}
-
-		select{
-			height:2em;
-		}
-
 		body{
-			background-image: url('laptop.jpg');
+			background-image: url('img/background.jpg');
 			background-repeat: no-repeat;  
 			background-size: cover;
 		}
 
-		.myform{
-			color: white;
-			font-size: 15px;
-			padding: 70px 20px 20px;
-		}
+		.login-box{
+    width: 420px;
+    height: 1000px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    top: 55%;
+    left: 50%;
+    position: relative;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+}
+
+.avatar{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+
+}
+
+h1{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 25px;
+
+}
+
+.login-box p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+
+}
+
+.login-box input{
+    width: 100%;
+    margin-bottom: 20px;
+
+}
+
+.login-box input[type="text"], input[type="password"]{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background:transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.login-box input[type="submit"]{
+    border:none;
+    outline: none;
+    height: 40px;
+    background: #1c8adb;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+
+}
+
+.login-box input[type="submit"]:hover{
+    cursor: pointer;
+    background: #39dc79;
+    color:#000;
+}
+
+.login-box a{
+    text-decoration:none;
+    font-size: 14px;
+    color: #fff;
+}
+
+.login-box a:hover{
+    color: #39dc79;
+}
+
+
+::placeholder{
+    color: black;
+    }
+
+
+label{
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+h1{
+    font-size: 2em;
+}
+
+		
 	</style>
 	<title>Leave Details</title>
 </head>
@@ -65,7 +131,7 @@ session_start();
 		<li><a href="facultyspecialrequeststatus.php">Special Request Status</a></li>
 		<li style="float:right"><a class="active" href="logout.php">Logout</a></li>
 	</ul>
-		<div class="blackboard">
+		<div class="avatar">
 			<div class="form">
 				<form action = "facultyleave.php" method = "POST" enctype = "multipart/form-data" class="myform">
 					<center><p>
@@ -122,6 +188,8 @@ session_start();
 }
 ?>
 </center>
+
+<div class="login-box">
 <p>
 	<label>Training Program:</label>
 	<select required name = "type">
@@ -192,6 +260,7 @@ session_start();
 	<input type="submit" value="Submit" name = "btn"/>
 </p>
 </form>
+</div>
 </div>
 </div>
 </div>

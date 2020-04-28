@@ -12,15 +12,15 @@ public class Mailer {
 public static void send(String to,String subject,String msg) throws UnsupportedEncodingException{  
    
 Properties props = new Properties();  
-props.put("mail.smtp.host", ""); 
-props.put("mail.smtp.port", ""); 
+props.put("mail.smtp.host", "smtp.gmail.com"); 
+props.put("mail.smtp.port", "587"); 
 props.put("mail.smtp.auth", "true");
 props.put("mail.smtp.starttls.enable", "true");  
   
 Session session = Session.getInstance(props,  
  new javax.mail.Authenticator() {  
   protected PasswordAuthentication getPasswordAuthentication() {  
-   return new PasswordAuthentication("","");  
+   return new PasswordAuthentication("dynamicarehealth@gmail.com","dynacare@1");  
    }  
 });  
 

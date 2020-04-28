@@ -1,57 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-		<link rel="stylesheet" type="text/css" href="blackboard.css">
-		<link rel="stylesheet" type="text/css" href="button.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="img/logo.jpg">
+
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/btn.css">
+	<link rel="stylesheet" type="text/css" href="css/table.css">
+
+	
 	<style type="text/css">
-
-		textarea {
-		height:100px;
-		font-size: 1.5em;
-		line-height: 1em;
-		resize: none;
-}
-
-
-		.blackboard:before {
-		box-sizing: border-box;
-		display: block;
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		background-image: linear-gradient( 175deg, transparent, transparent 40px, rgba(120, 120, 120, 0.1) 100px, rgba(120, 120, 120, 0.1) 110px, transparent 220px, transparent), linear-gradient( 200deg, transparent 80%, rgba(50, 50, 50, 0.3)), radial-gradient( ellipse at right bottom, transparent, transparent 200px, rgba(80, 80, 80, 0.1) 260px, rgba(80, 80, 80, 0.1) 320px, transparent 400px, transparent);
-		border: #2c2c2c solid 2px;
-		content: "Leave Review";
-		font-family: 'Permanent Marker', cursive;
-		font-size: 2.2em;
-		color: rgba(0,200,200,0.7);
-		text-align: center;
-		padding-top: 20px;
-}
-body{
-			background-image: url('laptop.jpg');
+		body{
+			background-image: url('img/background.jpg');
 			background-repeat: no-repeat;  
 			background-size: cover;
 		}
 
-		select{
-	height:2em;
-}
-
-	.amount{
-		width: 6em;
-	}
-
-	.ods{
-		width: 3em;
-	}
-
-	.myform{
-			color: white;
-			font-size: 15px;
-			padding: 70px 20px 20px;
-		}
-</style>
+	</style>
 	<title>Comment of fdc</title>
 </head>
 <body>
@@ -61,6 +28,7 @@ body{
 		<li><a href="fdcrequest.php">Pending Request</a></li>
 		<li><a href="fdcaccepted.php">Accepted</a></li>
 		<li><a href="fdcrejected.php">Rejected</a></li>
+		<?php include 'multiple.php';?>
 		<li style="float:right"><a class="active" href="logout.php" onclick="preventBack()">Logout</a></li>
 	</ul>
 	<div class="blackboard">
@@ -109,6 +77,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET')
 	{
 		while($row = $result->fetch_assoc())
 		{
+			$_SESSION['title'] = $row['Title'];
 			echo"<p><label>Name: ".$row['Name'].
 					"</label> 
 
@@ -180,8 +149,8 @@ if($_SERVER['REQUEST_METHOD'] == 'GET')
 
 			echo"<p><label>Remark: </label>
 						<select name = 'remark'>
-							<option>Accepted</option>
-							<option>Rejected</option>
+							<option>Forward</option>
+							<option>Revert</option>
 						</select>
 				</p>";
 			echo"<p><label>Reason for Remark:</label>

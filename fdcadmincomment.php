@@ -1,79 +1,79 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="blackboard.css">
-		<link rel="stylesheet" type="text/css" href="button.css">
+	<title>Special Request</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="img/logo.jpg">
+
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/btn.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+
+	
 	<style type="text/css">
-
-		.myform{
-			color: white;
-			font-size: 15px;
-			padding: 70px 20px 20px;
-		}
-
-		textarea {
-		height:100px;
-		font-size: 1.5em;
-		line-height: 1em;
-		resize: none;
-}
-
-
-		.blackboard:before {
-		box-sizing: border-box;
-		display: block;
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		background-image: linear-gradient( 175deg, transparent, transparent 40px, rgba(120, 120, 120, 0.1) 100px, rgba(120, 120, 120, 0.1) 110px, transparent 220px, transparent), linear-gradient( 200deg, transparent 80%, rgba(50, 50, 50, 0.3)), radial-gradient( ellipse at right bottom, transparent, transparent 200px, rgba(80, 80, 80, 0.1) 260px, rgba(80, 80, 80, 0.1) 320px, transparent 400px, transparent);
-		border: #2c2c2c solid 2px;
-		content: "Leave Review";
-		font-family: 'Permanent Marker', cursive;
-		font-size: 2.2em;
-		color: rgba(0,200,200,0.7);
-		text-align: center;
-		padding-top: 20px;
-}
-body{
-			background-image: url('laptop.jpg');
+		body{
+			background-image: url('img/background.jpg');
 			background-repeat: no-repeat;  
-			background-size: 1500px 800px;
+			background-size: 3000px;
 		}
 
-		select{
-	height:2em;
-}
+		input[type="checkbox"]{
+			width: 1em;
+			height:1.1em;
+		}
 
-	.amount{
-		width: 6em;
-	}
+		.login-box{
+			height: 1225px;
+			margin-top:400px;
+			width: 500px;
+		}
+		label{
+			font-size: 1.3em;
+		}
 
-	.ods{
-		width: 3em;
-	}
+		input[type="number"]{
+			font-size: 1em;
+		}
+		input[type="date"]{
+			font-size: 1.2em;
+		}
+		select, textarea{
+			font-size: 1.2em;
+		}
 
-	input[type="date"]{
-		width: 8.5em;
-	}
-</style>
-	<title>Comment of fdc</title>
+	</style>
 </head>
 <body>
-	<div class="shade">
-	<ul>
-		<li><a href="fdcadminhome.php">Home</a></li>
-		<li><a href="addmember.php">Add Member</a></li>
-		<li><a href="deletemember.php">Delete Member</a></li>
-		<li><a href="specialrequest.php">Special Request</a></li>
-		<li><a href="fdcadminhistory.php">History</a></li>
-		<li style="float:right;"><a class="active" href="logout.php" onclick="preventBack()">Logout</a></li>
-	</ul>
-	<div class="blackboard">
-		<div class="form">
-<form action = fdcadmincomment2.php method = 'POST' class="myform">
-<?php
-session_start();
-$temp = $_GET['id'];
+		<ul>
+			<a href="fdcadminhome.php"><img src="img/logo.jpg" class="img"></a>
+			<li><a href="fdcadminhome.php">Home</a></li>
+			<li class="dropdown"><a href="#" class="dropbtn">Member <i class="fa fa-caret-down"></i></a>
+					<div class="dropdown-content">
+					<a href="addmember.php" >Add Member</a>
+					<a href="deletemember.php">Delete Member</a>
+				</div>
+			</li>
+			<li><a href="specialrequest.php" class="active">Special Request</a></li>
+			<li><a href="fdcadminhistory.php">History</a></li>
+			<li><a href="conveyorcomment.php">Conveyor</a></li>
+
+			<li style="float: right;"><a href="logout.php" onclick="preventBack()">Logout</a></li>
+		</ul>
+
+		<div class="login-box">
+			<a href="#.php"><img src="img/logo.jpg" alt="KJSCE" class="avatar"></a>
+			<h1 style="color: black;">Admin Comment</h1>
+
+			<form action = fdcadmincomment2.php method = "POST">
+
+				<?php
+				$temp = $_GET['id'];
 $arr = explode(",", $temp);
 $_SESSION['facultymail'] = $facultymail = $arr[0];
 $_SESSION['startdate'] = $startdate = $arr[1];
@@ -85,14 +85,14 @@ if($_SERVER['REQUEST_METHOD'] == 'GET')
 	$db = 'fdc';
 
 	$conn = mysqli_connect($localhost, $username, $password, $db);
-	if($conn)
+	/*if($conn)
 	{
-		//echo "Connection sucessful";
+		echo "Connection sucessful";
 	}
 	else
 	{
 		echo "Error".mysqli_connect_error();
-	}
+	}*/
 
 
 	$sql = "Select a.*,b.HOD_name,b.HOD_email,b.HOD_Remark,b.HOD_Remark_Reason from application_data a left join fdc_leave_data b on a.Email = b.Faculty_Mailid Where b.Faculty_Mailid='$facultymail' and a.Start_date = '$startdate' and b.Start_Date = '$startdate' and a.Special_Request = 'Yes' and b.Special_Request = 'Yes'";
@@ -101,94 +101,91 @@ if($_SERVER['REQUEST_METHOD'] == 'GET')
 	{
 		while($row = $result->fetch_assoc())
 		{
-			echo "<p><label>Name: ".$row['Name'].
-					"</label>
+			echo "<center><label>Name: ".$row['Name'].
+				  "</label><br><br>".
 
-						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp".
+				  	"<label>Branch: ".$row['Branch'].
+						"</label><br><br>".
 
-					"<label>Branch: ".$row['Branch'].
-						"</label>
-					</p>".
-					"<p><label>Email id: ".$row['Email'].
-						"</label>
-					</p>".
-					"<p><label>Type of Program: ".$row['Type'].
-						"</label>
-					</p>".					
-					"<p><label>Title: ".$row['Title'].
-						"</label>
-					</p>".
-					"<p><label>Name of Organization: ".$row['Name_of_Organization'].
-						"</label>
-					</p>".
-					"<p><label>Address of Organization: ".$row['Address_of_organization'].
-						"</label>
-					</p>".
-					"<p><label>Other Organizations: ".$row['Other_Organizations'].
-						"</label>
-					</p>".
-					"<p><label>Special Request: ".$row['Special_Request'].
-						"</label>
-					</p>".					
-					"<p><label>Training Start Date: ".$row['Start_date'].
-						"</label>
-					</p>".
-					"<p><label>Training End Date:".$row['End_date'].
-						"</label>
-					</p>".
-					"<p><label>Number of ODs claimed: ".$row['Total_no_of_ods'].
-						"</label>
-					</p>".
-					"<p><label>Last date of Registration: ".$row['Last_date_for_registration'].
-						"</label>
-					</p>".
-					"<p><label>Period: ".$row['Period'].
-						"</label>
-					</p>".
-					"<p><label>Registration fee: ".$row['Registration_fee'].
-						"</label>
-					</p>".
-					"<p><label>Period: ".$row['Period'].
-						"</label>
-					</p>".
-					"<p><label>Amount Claimed: ".$row['Amount_claimed'].
-						"</label>
-					</p>".
-					"<p><label>Reason: ".$row['Purpose'].
-						"</label>
-					</p>";
+					"<label>Email id: ".$row['Email'].
+						"</label><br><br>".
+
+					"<label>Type of Program: ".$row['Type'].
+						"</label><br><br>".		
+
+					"<label>Title: ".$row['Title'].
+						"</label><br><br>".
+
+					"<label>Name of Organization: ".$row['Name_of_Organization'].
+						"</label><br><br>".
+
+					"<label>Address of Organization: ".$row['Address_of_organization'].
+						"</label><br><br>".
+
+					"<label>Other Organizations: ".$row['Other_Organizations'].
+						"</label><br><br>".
+
+					"<label>Special Request: ".$row['Special_Request'].
+						"</label><br><br>".	
+
+					"<label>Training Start Date: ".$row['Start_date'].
+						"</label><br><br>".
+
+					"<label>Training End Date:".$row['End_date'].
+						"</label><br><br>".
+
+					"<label>Number of ODs claimed: ".$row['Total_no_of_ods'].
+						"</label><br><br>".
+
+					"<label>Last date of Registration: ".$row['Last_date_for_registration'].
+						"</label><br><br>".
+
+					"<label>Period: ".$row['Period'].
+						"</label><br><br>".
+
+					"<label>Registration fee: ".$row['Registration_fee'].
+						"</label><br><br>".
+
+					"<label>Period: ".$row['Period'].
+						"</label><br><br>".
+
+					"<label>Amount Claimed: ".$row['Amount_claimed'].
+						"</label><br><br>".
+
+					"<label>Reason: ".$row['Purpose'].
+						"</label></center>";
+
 
 			echo "<br>";
 
-			echo "<p><label>Remark: </label>
+
+			echo "<label>Remark: </label>
 						<select name = 'remark' required>
 							<option value=''></option>
 							<option>Accepted</option>
 							<option>Rejected</option>
-						</select>
-				</p>";
-			echo "<p><label>Reason for Remark:</label>
-							<textarea rows = '4' cols = '50' name = 'remark_reason' maxlength = '400' required>
-							</textarea>
-				</p>";
-			echo "<p><label>Date: </label>
-						<input type = 'date' name = 'date_of_meeting' required>
-				</p>";
-			echo "<p><label>Amount Sanctioned:</label>
-						<input type = 'number' name = 'amount_sanctioned' class='amount' required>
-				</p>";
-			echo "<p><label>ODs Sanctioned:</label>
-						<input type = 'number' name = 'ods_sanctioned' class='ods' required>
-				</p>";
-		}
-	}
+						</select><br><br>";
 
+			echo "<label>Reason for Remark:</label>
+							<textarea rows = '4' cols = '45' name = 'remark_reason' maxlength = '400' required>
+							</textarea><br><br>";
+
+			echo "<label>Date: </label>&nbsp &nbsp
+						<input type = 'date' name = 'date_of_meeting' required style='width:auto;'><br>";
+
+			echo "<label>Amount Sanctioned:</label>&nbsp &nbsp
+						<input type = 'number' name = 'amount_sanctioned' required style='width:auto;'><br>";
+
+			echo "<label>ODs Sanctioned:</label> &nbsp &nbsp &nbsp &nbsp &nbsp
+						<input type = 'number' name = 'ods_sanctioned' required style='width:auto;'><br>";
+				
+}
+}
 }
 ?>
 <br>
-<p class="wipeout">
-<input type= "submit" value = "submit">
-</p>
+<input type="submit" value="Submit">
 </form>
+</div>
 </body>
 </html>

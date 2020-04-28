@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="background.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/btn.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
 	<title>Adding a member</title>
 </head>
 <body>
-<?php
+	<?php
 
 /*
 use PHPMailer\PHPMailer\PHPMailer;
@@ -37,14 +39,27 @@ $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
 $mail->SMTPAuth = true;
 */
 
-	$mname = $_POST['mname'];
-	$memail = $_POST['memail'];
-	$mpassword = $_POST['mpassword'];
+$mname = $_POST['mname'];
+$memail = $_POST['memail'];
+$mpassword = $_POST['mpassword'];
 
-	if(isset($_POST['mtype']))
-	{
-		$mtype = $_POST['mtype'];
-	}
+if(!empty($_POST['mtype']))
+{
+	$mtype = '';
+	$i = 0;
+	foreach ($_POST['mtype'] as $type) {
+		if($i == 0)
+		{
+			$mtype = $mtype.$type;
+			$i = $i + 1;
+		}
+		else
+		{
+			$mtype = $mtype.','.$type;
+		}
+	};
+		//echo '$mtype';
+}
 
 	/*
 	//Username to use for SMTP authentication - use full email address for gmail
@@ -85,47 +100,52 @@ if (!$mail->send()) {
     #}
 }
 */
-	$localhost = 'localhost';
-	$username = 'root';
-	$password = '';
-	$db = 'fdc';
+$localhost = 'localhost';
+$username = 'root';
+$password = '';
+$db = 'fdc';
 
-	$conn = mysqli_connect($localhost, $username, $password, $db);
-	if($conn)
+$conn = mysqli_connect($localhost, $username, $password, $db);
+if($conn)
+{
+	//echo "Connection sucessful";
+}
+else
+{
+	//echo "Error".mysqli_connect_error();
+}
+
+$ods = 12;
+$amount = 12000;
+$special_ods = 0;
+$special_amount = 0;
+
+echo "'$mname','$memail','$mtype','$mpassword'";
+$sql = "Insert into faculty(Name, Email, MemberType, Password) values ('$mname','$memail','$mtype','$mpassword')";
+$result = $conn->query($sql);
+if($result)
+{
+	$sql2 = "Insert into resource_data(Name,Email,ODs,Amount,Special_Ods,Special_Amount) values('$mname', '$memail','$ods','$amount','$special_ods','$special_amount')";
+	$result2 = $conn->query($sql2);
+	if($result2)
 	{
-		echo "Connection sucessful";
+		echo "<script>
+				alert('Member Successfully Added');
+				window.location.href='fdcadminhome.php';
+				</script>";
 	}
 	else
 	{
-		echo "Error".mysqli_connect_error();
+		$_SESSION['errMsg'] = "*Couldnt Update The Details.";
+		header("Location: addmember.php");
 	}
+}
+else
+{
+	$_SESSION['errMsg'] = "*Couldnt Update The Details.";
+		header("Location: addmember.php");
+}
 
-	$ods = 12;
-	$amount = 12000;
-	$special_ods = 0;
-	$special_amount = 0;
-
-	echo "'$mname','$memail','$mtype','$mpassword'";
-	$sql = "Insert into faculty(Name, Email, MemberType, Password) values ('$mname','$memail','$mtype','$mpassword')";
-	$result = $conn->query($sql);
-	if($result)
-	{
-		$sql2 = "Insert into resource_data(Name,Email,ODs,Amount,Special_Ods,Special_Amount) values('$mname', '$memail','$ods','$amount','$special_ods','$special_amount')";
-		$result2 = $conn->query($sql2);
-		if($result2)
-		{
-			header("Location: fdcadminhome.php");
-		}
-		else
-		{
-			echo "error in result2";
-		}
-	}
-	else
-	{
-		echo " error in result1";
-	}
-	
 }
 ?>
 

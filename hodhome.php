@@ -5,16 +5,24 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="img/logo.jpg">
 
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/btn.css">
+	<link rel="stylesheet" type="text/css" href="css/table.css">
+
+	
 	<style type="text/css">
 		body{
-			background-image: url('laptop.jpg');
+			background-image: url('img/background.jpg');
 			background-repeat: no-repeat;  
 			background-size: cover;
 		}
+
 	</style>
-	<link rel="stylesheet" type="text/css" href="button.css">
-	<link rel="stylesheet" type="text/css" href="blackboard.css">
 
 	<script type="text/javascript">
 		function preventBack() { window.history.forward(); }
@@ -34,12 +42,10 @@ session_start();
 		<li style="float:right"><a class="active" href="logout.php" onclick="preventBack()">Logout</a></li>
 	</ul>
 
-			<div class="blackboard">
-			<p style="text-align: center;">
+	<h1 style="text-align: center">
 				<label>Welcome <?php echo $_SESSION['name'];?>
-				</label>
-			</p>
-	</div>
+			</label>
+		</h1>
 
 </body>
 </html>

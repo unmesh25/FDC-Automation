@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="img/logo.jpg">
 
-	<link rel="stylesheet" type="text/css" href="blackboard.css">
-	<link rel="stylesheet" type="text/css" href="button.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/btn.css">
+	<link rel="stylesheet" type="text/css" href="css/table.css">
+
 	<title>Deletion</title>
 </head>
 <body>
@@ -28,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET')
 		//echo "Error".mysqli_connect_error();
 	}
 
-	$sql = "Delete From application_data Where Email = '$mail'";
+	$sql = "Update application_data  Set Inactive = '1' Where Email = '$mail'";
 	$result = $conn->query($sql);
 	if($result)
 	{}
@@ -37,7 +41,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET')
 		//echo "1";
 	}
 
-	$sql = "Delete From faculty Where Email = '$mail'";
+	$sql = "Update faculty  Set Inactive = '1' Where Email = '$mail'";
 	$result = $conn->query($sql);
 	if($result)
 	{}
@@ -46,7 +50,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET')
 		//echo "2";
 	}
 
-	$sql = "Delete From fdc_leave_data Where Faculty_Mailid = '$mail'";
+	$sql = "Update fdc_leave_data  Set Inactive = '1' Where Faculty_Mailid = '$mail'";
 	$result = $conn->query($sql);
 	if($result)
 	{}
@@ -55,7 +59,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET')
 		//echo "3";
 	}
 
-	$sql = "Delete From fdc_sanction_data Where Faculty_Mail = '$mail'";
+	$sql = "Update fdc_sanction_data  Set Inactive = '1' Where Faculty_Mail = '$mail'";
 	$result = $conn->query($sql);
 	if($result)
 	{}
@@ -64,7 +68,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET')
 		//echo "4";
 	}
 
-	$sql = "Delete From leave_data Where Email = '$mail'";
+	$sql = "Update leave_data  Set Inactive = '1' Where Email = '$mail'";
 	$result = $conn->query($sql);
 	if($result)
 	{}
@@ -73,7 +77,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET')
 		//echo "5";
 	}
 
-	$sql = "Delete From leave_data_Files Where Email = '$mail'";
+	$sql = "Update leave_data_Files Set Inactive = '1' Where Email = '$mail'";
 	$result = $conn->query($sql);
 	if($result)
 	{}
@@ -82,7 +86,16 @@ if($_SERVER['REQUEST_METHOD'] == 'GET')
 		//echo "6";
 	}
 
-	$sql = "Delete From resource_data Where Email = '$mail'";
+	$sql = "Update resource_data  Set Inactive = '1' Where Email = '$mail'";
+	$result = $conn->query($sql);
+	if($result)
+	{}
+	else
+	{
+		//echo "7";
+	}
+
+	$sql = "Update admin_sanction_data  Set Inactive = '1' Where Faculty_Mail = '$mail'";
 	$result = $conn->query($sql);
 	if($result)
 	{}

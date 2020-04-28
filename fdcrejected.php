@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="img/logo.jpg">
+
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/btn.css">
+	<link rel="stylesheet" type="text/css" href="css/table.css">
+
+	
 	<style type="text/css">
 		body{
-			background-image: url('laptop.jpg');
+			background-image: url('img/background.jpg');
 			background-repeat: no-repeat;  
 			background-size: cover;
 		}
+
 	</style>
-	<link rel="stylesheet" type="text/css" href="table.css">
-	<link rel="stylesheet" type="text/css" href="button.css">
-	<link rel="stylesheet" type="text/css" href="blackboard.css">
-	<title>FDCM rejected</title>
+	<title>Reverted</title>
 </head>
 <body>
 	<div class="shade">
@@ -20,56 +28,12 @@
 		<li><a href="fdcrequest.php">Pending Request</a></li>
 		<li><a href="fdcaccepted.php">Accepted</a></li>
 		<li><a href="fdcrejected.php">Rejected</a></li>
+		<?php include 'multiple.php';?>
 		<li style="float:right"><a class="active" href="logout.php" onclick="preventBack()">Logout</a></li>
 	</ul>
 	<p style="text-align: center;">
-	<label>Rejected</label>
+	<label>Reverted</label>
 </p>
-<table border = "1 solid black">
-	<tr>
-		<td>Faculty Name</td>
-		<td>Branch</td>
-		<td>Faculty Mailid</td>
-		<td>Date of Meeting</td>
-		<td>Remark Reason</td>
-	</tr>
-	<?php
-		session_start();
-		if($_SERVER['REQUEST_METHOD'] == 'GET')
-		{
-
-			$localhost = 'localhost';
-			$username = 'root';
-			$password = '';
-			$db = 'fdc';
-
-			$conn = mysqli_connect($localhost, $username, $password, $db);
-			/*if($conn)
-			{
-				echo "Connection sucessful";
-			}
-			else
-			{
-				echo "Error".mysqli_connect_error();
-			}*/
-
-			$sql = "Select * from fdc_sanction_data where Branch = '$_SESSION[branch]' and Remark = 'Rejected'";
-			$result = $conn->query($sql);
-			if($result->num_rows>0)
-			{
-				while($row = $result->fetch_assoc())
-				{
-					echo "<tr><td>".$row['Faculty_Name']."</td>".
-					"<td>".$row['Branch']."</td>".
-					"<td>".$row['Faculty_Mail']."</td>".
-					"<td>".$row['Date_of_Meeting']."</td>".
-					"<td>".$row['Remark_Reason']."</td></tr>";
-				}
-			}
-
-
-		}
-	?>
-</table>
+	<?php include 'revert.php'; ?>
 </body>
 </html>

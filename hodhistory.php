@@ -2,17 +2,27 @@
 <html>
 <head>
 
+	
+	<title>HOD History</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="img/logo.jpg">
+
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/btn.css">
+	<link rel="stylesheet" type="text/css" href="css/table.css">
+
+	
 	<style type="text/css">
 		body{
-			background-image: url('laptop.jpg');
+			background-image: url('img/background.jpg');
 			background-repeat: no-repeat;  
 			background-size: cover;
 		}
+
 	</style>
-	<link rel="stylesheet" type="text/css" href="table.css">
-	<link rel="stylesheet" type="text/css" href="button.css">
-	<link rel="stylesheet" type="text/css" href="blackboard.css">
-	<title>HOD History</title>
 </head>
 <body>
 	<div class="shade">
